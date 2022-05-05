@@ -826,6 +826,7 @@
   ./services/networking/onedrive.nix
   ./services/networking/openfire.nix
   ./services/networking/openvpn.nix
+  ./services/networking/openvpn3.nix
   ./services/networking/ostinato.nix
   ./services/networking/owamp.nix
   ./services/networking/pdnsd.nix
