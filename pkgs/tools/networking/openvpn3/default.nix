@@ -1,28 +1,29 @@
 { lib
 , stdenv
 , fetchFromGitHub
+
+# buildtime
 , autoreconfHook
 , autoconf-archive
-, git
-, pkg-config
-, glib
-, jsoncpp
-, libcap_ng
-, libnl
-, libuuid
-, lz4
-, openssl
-, protobuf
-, python3
-, tinyxml
-
 , docutils
 , jinja2
+, git
+, pkg-config
+, lz4
+, jsoncpp
+, glib
+, libuuid
+, libcap_ng
+, openssl
+, tinyxml-2
+
+# runtime
+, python3
 }:
 
 stdenv.mkDerivation rec {
   pname = "openvpn3";
-  version = "13_beta";
+  version = "17_beta";
 
   src = fetchFromGitHub {
     owner = "OpenVPN";
@@ -30,7 +31,7 @@ stdenv.mkDerivation rec {
     rev = "v${version}";
     fetchSubmodules = true;
     leaveDotGit = true;
-    sha256 = "087y3j8ndfbw71igv5gk4i7qmyga2ly74v62wpjyfwx0p4cp8wky";
+    sha256 = "0bvzxssw4vjjr2lvri2mw9x1fpx91rc0kjfplifp24n41krdxpf4";
   };
 
   postPatch = ''
@@ -46,19 +47,19 @@ stdenv.mkDerivation rec {
     jinja2
     pkg-config
   ];
-  propagatedBuildInputs = [
-    python3
-  ];
+
   buildInputs = [
-    glib
-    jsoncpp
-    libcap_ng
-    libnl
-    libuuid
     lz4
+    jsoncpp
+    glib
+    libuuid
+    libcap_ng
     openssl
-    protobuf
-    tinyxml
+    tinyxml-2
+  ];
+
+  propagatedbuildinputs = [
+    python3
   ];
 
   configureFlags = [ "--disable-selinux-build" ];
